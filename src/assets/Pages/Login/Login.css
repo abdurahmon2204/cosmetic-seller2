@@ -1,0 +1,169 @@
+.auth-page {
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fdfbfb;
+}
+
+.auth-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-card h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.auth-input-group {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  transition: 0.3s;
+}
+
+.auth-input-group:focus-within {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+.auth-icon {
+  color: #6c5ce7;
+  margin-right: 12px;
+  font-size: 1.1rem;
+}
+
+.auth-input-group input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.auth-submit-btn:hover {
+  background: #5b4cc4;
+  transform: translateY(-2px);
+}
+
+.auth-switch {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.auth-switch span {
+  color: #6c5ce7;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- Media Queries (Kirish va Ro'yxatdan o'tish sahifasi uchun) --- */
+
+/* 1. Kichik planshetlar va katta telefonlar uchun (768px dan kichik) */
+@media (max-width: 768px) {
+  .auth-card {
+    max-width: 350px;
+    padding: 30px;
+  }
+
+  .auth-card h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* 2. Smartfonlar uchun (480px dan kichik) */
+@media (max-width: 480px) {
+  .auth-page {
+    /* Telefonlarda height: 100vh ba'zan brauzer navigatsiyasi bilan muammo qiladi, 
+       shuning uchun min-height ishlatamiz */
+    min-height: calc(100vh - 60px); 
+    padding: 20px;
+    align-items: flex-start; /* Telefonlarda yuqoriroqdan boshlangani ma'qul */
+    padding-top: 50px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+    padding: 25px 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03); /* Soyani yumshatamiz */
+    border-radius: 16px;
+  }
+
+  .auth-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .auth-subtitle {
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+  }
+
+  .auth-input-group {
+    padding: 10px 12px;
+    margin-bottom: 12px;
+  }
+
+  .auth-input-group input {
+    font-size: 16px; /* iPhone-larda inputga kirganda avtomatik zoom bo'lmasligi uchun kamida 16px bo'lishi kerak */
+  }
+
+  .auth-submit-btn {
+    padding: 14px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  .auth-switch {
+    margin-top: 20px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 3. Juda kichik telefonlar va landshaft (yotiq) rejimi uchun */
+@media (max-height: 500px) and (orientation: landscape) {
+  .auth-page {
+    height: auto;
+    padding: 40px 10px;
+  }
+  
+  .auth-card {
+    max-width: 500px;
+  }
+}

@@ -1,0 +1,254 @@
+.navbar {
+  height: 80px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: #333;
+  letter-spacing: 2px;
+}
+
+.navbar-logo span {
+  color: #6c5ce7;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-links:hover, .nav-links.active {
+  color: #6c5ce7;
+}
+
+/* Actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.cart-icon-container {
+  position: relative;
+  font-size: 1.4rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.signup-button {
+  text-decoration: none;
+  background: #6c5ce7;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.signup-button:hover {
+  background: #5b4cc4;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+.nav-auth-desktop{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Mobile styles */
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* Savatcha har doim ko'rinib turishi uchun */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1001; /* Menyudan teparoqda turishi uchun */
+}
+
+.cart-icon-container {
+  font-size: 1.6rem;
+  color: #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff4757;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* Foydalanuvchi profili stili */
+.user-profile-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f3f0ff;
+  padding: 5px 12px;
+  border-radius: 50px;
+  border: 1px solid #e0d7ff;
+}
+
+.user-icon {
+  color: #6c5ce7;
+  font-size: 1.1rem;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.logout-icon-btn {
+  background: none;
+  border: none;
+  color: #ff4757;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 0;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.logout-icon-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Auth */
+.nav-auth-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-auth-mobile {
+    display: flex;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+  
+  .logout-btn-mobile {
+    width: 100%;
+    padding: 12px;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+}
+/* Mobil sozlamalar */
+@media (max-width: 768px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-between; /* Elementlarni chetga suradi */
+    padding: 0 15px;
+  }
+
+  .nav-menu {
+    position: fixed; /* Menyu butun ekranni yopishi uchun */
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: white;
+    flex-direction: column;
+    transition: 0.4s;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-auth-desktop {
+    display: none; /* Mobil versiyada faqat savatcha qoladi */
+  }
+}
+
+@media (max-width: 960px) {
+  .menu-icon { display: block; }
+  .nav-auth-desktop { display: none; }
+  
+  .nav-menu {
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    height: 90vh;
+    transition: 0.4s;
+    padding-top: 50px;
+  }
+
+  .nav-menu.active { left: 0; }
+  
+  .nav-auth-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    margin-top: 30px;
+  }
+}
