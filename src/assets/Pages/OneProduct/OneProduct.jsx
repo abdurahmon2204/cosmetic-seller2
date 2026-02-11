@@ -81,6 +81,7 @@ const ProductDetail = ({ cart, setCart }) => {
           <button className="add-cart-btn" onClick={handleAddToCart}>
             Savatchaga qo‘shish
           </button>
+          <a href="#">https://t.me/glow_seul_cosmetics</a>
         </div>
       </div>
     </div>
