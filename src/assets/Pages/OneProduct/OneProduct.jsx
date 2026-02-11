@@ -88,7 +88,7 @@ const ProductDetail = ({ cart, setCart }) => {
             rel="noopener noreferrer"
             className="telegram-link"
           >
-            Telegram kanalimizga obuna bo'ling
+            Telegram guruhimizga otib quyidagi mahsulotlarni buyurtma qilishingiz mumkin,hamda  obuna bolib qoying
           </a>
         </div>
       </div>
