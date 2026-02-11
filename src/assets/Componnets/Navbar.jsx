@@ -31,7 +31,7 @@ const Navbar = ({ cartCount }) => {
 
         {/* Logo */}
         <Link to="/" className="navbar-logo">
-          GLAM<span>OUR</span>
+          GLOW<span>SEUL</span>
         </Link>
 
         {/* Nav links */}
