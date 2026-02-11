@@ -8,7 +8,7 @@ const About = () => {
       {/* Hero Section */}
       <div className="about-hero">
         <div className="hero-content">
-          <h1>GLAMOUR Haqida</h1>
+          <h1>GLOWSEUL Haqida</h1>
           <p>Go'zallik va parvarish olamidagi sizning eng ishonchli hamrohingiz.</p>
         </div>
       </div>
@@ -19,7 +19,7 @@ const About = () => {
           <div className="section-text">
             <h2>Bizning Tariximiz</h2>
             <p>
-              GLAMOUR 2025-yilda ayollarga yuqori sifatli va tabiiy kosmetika mahsulotlarini 
+              GLOWSEUL 2025-yilda ayollarga yuqori sifatli va tabiiy kosmetika mahsulotlarini 
               oson topishga yordam berish maqsadida tashkil etilgan. Biz dunyodagi eng yetakchi 
               brendlar bilan to'g'ridan-to'g'ri hamkorlik qilib, faqatgina original va xavfsiz 
               mahsulotlarni yetkazib beramiz.
