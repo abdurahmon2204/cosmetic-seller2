@@ -4,34 +4,70 @@ import { FiMail, FiLock, FiUser, FiArrowRight } from 'react-icons/fi';
 import './Login.css';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true); // Login yoki SignUp holati
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [isLogin, setIsLogin] = useState(true); 
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'superadmin', jins: 'erkak', age: 25, phonenumber: '' });
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isLogin) {
-      // Login logikasi
-      const savedUser = JSON.parse(localStorage.getItem('user'));
-      
-      if (savedUser && savedUser.email === formData.email && savedUser.password === formData.password) {
-        localStorage.setItem('isLoggedIn', 'true');
-        alert("Xush kelibsiz!");
-        navigate('/'); // Asosiy sahifaga o'tish
-        window.location.reload(); // Navbardagi holatni yangilash uchun
+    const BACKEND_URL = "http://localhost:5222"; 
+
+    try {
+      if (isLogin) {
+        const response = await fetch(`${BACKEND_URL}/superadmin/login`, { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: formData.email, 
+            password: formData.password
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('token', data.token); 
+          localStorage.setItem('isLoggedIn', 'true');
+          alert("Xush kelibsiz!");
+          navigate('/'); 
+          window.location.reload(); 
+        } else {
+          alert(data.message || "Email yoki parol xato!");
+        }
+
       } else {
-        alert("Email yoki parol xato!");
+        const signupData = {
+          username: formData.email, 
+          password: formData.password,
+          jins: formData.jins,
+          role: formData.role,
+          phonenumber: formData.phonenumber, 
+          age: Number(formData.age)
+        };
+
+        const response = await fetch(`${BACKEND_URL}/superadmin/create`, { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(signupData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Ro'yxatdan muvaffaqiyatli o'tdingiz! Endi tizimga kiring.");
+          setIsLogin(true); 
+        } else {
+          alert(data.message || "Ro'yxatdan o'tishda xatolik!");
+        }
       }
-    } else {
-      // SignUp logikasi
-      localStorage.setItem('user', JSON.stringify(formData));
-      alert("Ro'yxatdan o'tdingiz! Endi login qiling.");
-      setIsLogin(true); // Login sahifasiga o'tkazish
+    } catch (error) {
+      console.error("Server bilan bog'lanishda xatolik:", error);
+      alert("Serverga ulanib bo'lmadi. Backend yoniq ekanligini tekshiring!");
     }
   };
 
@@ -40,21 +76,33 @@ const Auth = () => {
       <div className="auth-card">
         <h2>{isLogin ? 'Kirish' : "Ro'yxatdan o'tish"}</h2>
         <p className="auth-subtitle">
-          {isLogin ? 'Hush kelibsiz! Ma’lumotlaringizni kiriting.' : 'Bizga qo‘shiling va go‘zallikdan bahra oling.'}
+          {isLogin ? 'Xush kelibsiz! Ma’lumotlaringizni kiriting.' : 'Bizga qo‘shiling va tizimni boshqaring.'}
         </p>
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (
-            <div className="auth-input-group">
-              <FiUser className="auth-icon" />
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="To'liq ismingiz" 
-                required 
-                onChange={handleInputChange} 
-              />
-            </div>
+            <>
+              <div className="auth-input-group">
+                <FiUser className="auth-icon" />
+                <input 
+                  type="text" 
+                  name="name" 
+                  placeholder="To'liq ismingiz" 
+                  required 
+                  onChange={handleInputChange} 
+                />
+              </div>
+              <div className="auth-input-group">
+                <FiUser className="auth-icon" />
+                <input 
+                  type="text" 
+                  name="phonenumber" 
+                  placeholder="Telefon raqamingiz (+998...)" 
+                  required 
+                  onChange={handleInputChange} 
+                />
+              </div>
+            </>
           )}
 
           <div className="auth-input-group">
@@ -62,7 +110,7 @@ const Auth = () => {
             <input 
               type="email" 
               name="email" 
-              placeholder="Email manzilingiz" 
+              placeholder="Email manzilingiz (Username)" 
               required 
               onChange={handleInputChange} 
             />
