@@ -12,7 +12,7 @@ const Auth = () => {
     role: 'user',
     jins: 'erkak',
     surname: '',
-    status: 'active', 
+    status: 'aktiv',
     subject: '',
     age: '',
     phonenumber: ''
@@ -56,7 +56,8 @@ const Auth = () => {
         let signupData = {
           username: formData.username,
           password: formData.password,
-          jins: formData.jins
+          jins: formData.jins,
+          role: formData.role 
         };
 
         if (formData.role === 'user') {
@@ -91,7 +92,7 @@ const Auth = () => {
         }
       }
     } catch (error) {
-      console.error("Server bilan bog'lanishda xatolik:", error);
+      console.error(error);
       alert("Serverga ulanib bo'lmadi. Backend yoniq ekanligini tekshiring!");
     }
   };
@@ -114,7 +115,6 @@ const Auth = () => {
               value={formData.role} 
               onChange={handleInputChange} 
               required
-              style={{ width: '100%', padding: '10px 35px', borderRadius: '8px', border: '1px solid #ddd', outline: 'none', background: '#fff', fontWeight: 'bold' }}
             >
               <option value="user">Foydalanuvchi (User)</option>
               <option value="teacher">O'qituvchi (Teacher)</option>
@@ -133,7 +133,6 @@ const Auth = () => {
                   value={formData.jins} 
                   onChange={handleInputChange} 
                   required
-                  style={{ width: '100%', padding: '10px 35px', borderRadius: '8px', border: '1px solid #ddd', outline: 'none', background: '#fff' }}
                 >
                   <option value="erkak">Erkak</option>
                   <option value="ayol">Ayol</option>
@@ -162,7 +161,6 @@ const Auth = () => {
                     value={formData.status} 
                     onChange={handleInputChange} 
                     required
-                    style={{ width: '100%', padding: '10px 35px', borderRadius: '8px', border: '1px solid #ddd', outline: 'none', background: '#fff' }}
                   >
                     <option value="aktiv">Aktiv</option>
                     <option value="bloklangan">Bloklangan</option>
@@ -224,7 +222,6 @@ const Auth = () => {
             />
           </div>
 
-          {/* PASSWORD (Hamma rejimda va hamma rolda majburiy) */}
           <div className="auth-input-group">
             <FiLock className="auth-icon" />
             <input 
