@@ -3,7 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fdfbfb;
+  /* Fonni biroz chiroyliroq, yumshoq gradient qildik */
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  font-family: sans-serif;
 }
 
 .auth-card {
@@ -37,6 +39,7 @@
   margin-bottom: 15px;
   padding: 12px 15px;
   transition: 0.3s;
+  position: relative; /* Select strukturasi uchun */
 }
 
 .auth-input-group:focus-within {
@@ -48,14 +51,47 @@
   color: #6c5ce7;
   margin-right: 12px;
   font-size: 1.1rem;
+  flex-shrink: 0; /* Ikonka kichrayib ketmasligi uchun */
 }
 
-.auth-input-group input {
+/* INPUT va SELECT stillarini birlashtirdik */
+.auth-input-group input,
+.auth-select {
   border: none;
   background: none;
   outline: none;
   width: 100%;
   font-size: 1rem;
+  color: #333;
+}
+
+.auth-select {
+  cursor: pointer;
+  -webkit-appearance: none; /* Standart brauzer strelkasini o'chirish */
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 25px; /* O'ng tarafdagi strelka uchun joy */
+}
+
+/* Select elementlariga mos moslashtirilgan strelka (burchak) */
+.auth-input-group::after {
+  content: '▼';
+  font-size: 0.7rem;
+  color: #6c5ce7;
+  position: absolute;
+  right: 15px;
+  pointer-events: none; /* Strelkani bosganda ham select ochilishi uchun */
+}
+
+/* Agar input-group ichida input bo'lsa, burchakdagi strelkani yashiramiz */
+.auth-input-group:has(input)::after {
+  display: none;
+}
+
+/* Rol tanlash selectini biroz qalinroq va ajralib turadigan qildik */
+select[name="role"] {
+  font-weight: 600;
+  color: #4a3dc2;
 }
 
 .auth-submit-btn {
@@ -93,9 +129,8 @@
   cursor: pointer;
 }
 
-/* --- Media Queries (Kirish va Ro'yxatdan o'tish sahifasi uchun) --- */
+/* --- Media Queries --- */
 
-/* 1. Kichik planshetlar va katta telefonlar uchun (768px dan kichik) */
 @media (max-width: 768px) {
   .auth-card {
     max-width: 350px;
@@ -107,21 +142,18 @@
   }
 }
 
-/* 2. Smartfonlar uchun (480px dan kichik) */
 @media (max-width: 480px) {
   .auth-page {
-    /* Telefonlarda height: 100vh ba'zan brauzer navigatsiyasi bilan muammo qiladi, 
-       shuning uchun min-height ishlatamiz */
     min-height: calc(100vh - 60px); 
     padding: 20px;
-    align-items: flex-start; /* Telefonlarda yuqoriroqdan boshlangani ma'qul */
+    align-items: flex-start; 
     padding-top: 50px;
   }
 
   .auth-card {
     max-width: 100%;
     padding: 25px 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.03); /* Soyani yumshatamiz */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03); 
     border-radius: 16px;
   }
 
@@ -140,8 +172,10 @@
     margin-bottom: 12px;
   }
 
-  .auth-input-group input {
-    font-size: 16px; /* iPhone-larda inputga kirganda avtomatik zoom bo'lmasligi uchun kamida 16px bo'lishi kerak */
+  /* Telefonlarda selectlar ham zoom bo'lib ketmasligi uchun 16px qildik */
+  .auth-input-group input,
+  .auth-select {
+    font-size: 16px; 
   }
 
   .auth-submit-btn {
@@ -156,7 +190,6 @@
   }
 }
 
-/* 3. Juda kichik telefonlar va landshaft (yotiq) rejimi uchun */
 @media (max-height: 500px) and (orientation: landscape) {
   .auth-page {
     height: auto;
