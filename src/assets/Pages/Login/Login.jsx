@@ -5,7 +5,6 @@ import './Login.css';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true); 
-  // Boshlang'ich qiymatlarni bo'sh qildik, jins esa default 'erkak' turadi
   const [formData, setFormData] = useState({ 
     name: '', 
     email: '', 
@@ -28,14 +27,14 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        const response = await fetch(`${BACKEND_URL}/superadmin/login`, { 
+        const response = await fetch(`${BACKEND_URL}/${formData.role}/login`, { 
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             username: formData.email, 
             password: formData.password
           })
-        });
+        })
 
         const data = await response.json();
 
@@ -56,7 +55,7 @@ const Auth = () => {
           jins: formData.jins,
           role: formData.role,
           phonenumber: formData.phonenumber, 
-          age: Number(formData.age) // Matnni songa o'giramiz
+          age: Number(formData.age) 
         };
 
         const response = await fetch(`${BACKEND_URL}/superadmin/create`, { 
@@ -91,7 +90,6 @@ const Auth = () => {
         <form onSubmit={handleSubmit}>
           {!isLogin && (
             <>
-              {/* To'liq ism */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <input 
@@ -103,7 +101,6 @@ const Auth = () => {
                 />
               </div>
 
-              {/* Telefon raqam */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <input 
@@ -115,7 +112,6 @@ const Auth = () => {
                 />
               </div>
 
-              {/* Yosh (Yangi qo'shildi) */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <input 
@@ -129,7 +125,6 @@ const Auth = () => {
                 />
               </div>
 
-              {/* Jins (Yangi qo'shildi) */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <select 
