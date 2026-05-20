@@ -5,7 +5,16 @@ import './Login.css';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true); 
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'superadmin', jins: 'erkak', age: 25, phonenumber: '' });
+  // Boshlang'ich qiymatlarni bo'sh qildik, jins esa default 'erkak' turadi
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    password: '', 
+    role: 'superadmin', 
+    jins: 'erkak', 
+    age: '', 
+    phonenumber: '' 
+  });
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -47,7 +56,7 @@ const Auth = () => {
           jins: formData.jins,
           role: formData.role,
           phonenumber: formData.phonenumber, 
-          age: Number(formData.age)
+          age: Number(formData.age) // Matnni songa o'giramiz
         };
 
         const response = await fetch(`${BACKEND_URL}/superadmin/create`, { 
@@ -82,6 +91,7 @@ const Auth = () => {
         <form onSubmit={handleSubmit}>
           {!isLogin && (
             <>
+              {/* To'liq ism */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <input 
@@ -92,6 +102,8 @@ const Auth = () => {
                   onChange={handleInputChange} 
                 />
               </div>
+
+              {/* Telefon raqam */}
               <div className="auth-input-group">
                 <FiUser className="auth-icon" />
                 <input 
@@ -101,6 +113,36 @@ const Auth = () => {
                   required 
                   onChange={handleInputChange} 
                 />
+              </div>
+
+              {/* Yosh (Yangi qo'shildi) */}
+              <div className="auth-input-group">
+                <FiUser className="auth-icon" />
+                <input 
+                  type="number" 
+                  name="age" 
+                  placeholder="Yoshingiz" 
+                  min="1"
+                  max="120"
+                  required 
+                  onChange={handleInputChange} 
+                />
+              </div>
+
+              {/* Jins (Yangi qo'shildi) */}
+              <div className="auth-input-group">
+                <FiUser className="auth-icon" />
+                <select 
+                  name="jins" 
+                  className="auth-select" 
+                  value={formData.jins} 
+                  onChange={handleInputChange} 
+                  required
+                  style={{ width: '100%', padding: '10px 35px', borderRadius: '8px', border: '1px solid #ddd', outline: 'none', background: '#fff' }}
+                >
+                  <option value="erkak">Erkak</option>
+                  <option value="ayol">Ayol</option>
+                </select>
               </div>
             </>
           )}
