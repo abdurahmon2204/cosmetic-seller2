@@ -59,7 +59,7 @@ const Navbar = ({ cartCount }) => {
             {isLoggedIn ? (
               <div className="user-profile-nav">
                 <FiUser className="user-icon" />
-                <span className="user-name">{user?.username?.split(' ')[0]}</span>
+                <span className="user-name">{user?.name?.split(' ')[0]}</span>
                 <button onClick={handleLogout} className="logout-icon-btn" title="Chiqish">
                   <FiLogOut />
                 </button>
