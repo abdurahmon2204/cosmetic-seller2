@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FiShoppingCart, FiMenu, FiX, FiLogOut, FiUser } from 'react-icons/fi';
 import './Navbar.css';
@@ -8,11 +8,29 @@ const Navbar = ({ cartCount }) => {
   const navigate = useNavigate();
 
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  const user = JSON.parse(localStorage.getItem('user'));
+
+  // "undefined" yoki null qiymat kelsa, crash bo'lishini oldini oluvchi xavfsiz funksiya
+  const getUserData = () => {
+    try {
+      const savedUser = localStorage.getItem('user');
+      if (!savedUser || savedUser === "undefined") return null;
+      return JSON.parse(savedUser);
+    } catch (error) {
+      console.error("Local storage o'qishda xatolik:", error);
+      return null;
+    }
+  };
+
+  const user = getUserData();
 
   const handleLogout = () => {
     if (window.confirm("Tizimdan chiqmoqchimisiz?")) {
+      // Tizimdan chiqishda barcha eski qoldiqlarni tozalash
       localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      
       navigate('/');
       window.location.reload(); 
     }
@@ -56,10 +74,11 @@ const Navbar = ({ cartCount }) => {
           </Link>
           
           <div className="nav-auth-desktop">
-            {isLoggedIn ? (
+            {isLoggedIn && user ? (
               <div className="user-profile-nav">
                 <FiUser className="user-icon" />
-                <span className="user-name">{user?.name?.split(' ')[0]}</span>
+                {/* user?.name o'rniga user?.username qo'yildi */}
+                <span className="user-name">{user?.username?.split(' ')[0]}</span>
                 <button onClick={handleLogout} className="logout-icon-btn" title="Chiqish">
                   <FiLogOut />
                 </button>
