@@ -42,9 +42,14 @@ const Auth = () => {
         const data = await response.json();
 
         if (response.ok) {
+          // Mana shu yerda ma'lumotlarni saqlaymiz:
           localStorage.setItem('token', data.token); 
           localStorage.setItem('role', formData.role); 
           localStorage.setItem('isLoggedIn', 'true');
+          
+          // BACKENDDAN KELGAN HAQIQIY USERNI SAKLASH (MUAMMONING YECHIMI):
+          localStorage.setItem('user', JSON.stringify(data.user)); 
+
           alert("Xush kelibsiz!");
           navigate('/'); 
           window.location.reload(); 
@@ -108,7 +113,6 @@ const Auth = () => {
         <form onSubmit={handleSubmit}>
           
           <div className="auth-input-group">
-            <FiUser className="auth-icon" />
             <select 
               name="role" 
               className="auth-select" 
